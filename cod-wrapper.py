@@ -33,7 +33,7 @@ class _helpers():
     def __init__(self, headers, cookies, proxies):
         self.headers = headers
         self.cookies = cookies
-        self.proxies = _helpers.genproxy(proxies)
+        self.proxies = _helpers.genproxy(self,proxies)
 
     def genproxy(self,proxies):
         if (proxies==[]): return None
@@ -123,7 +123,8 @@ class _helpers():
         return f'We Could not get a valid reason for a failure. Status: {status}'
 
 class CODAPI():
-    config = {"platform":"uno"}
+    config = {}
+    config['platform']="uno"
 
     def __init__(self,sso_token=None,cookies=cookies,headers=headers,proxies=[]):
         self.sso = sso_token
@@ -133,11 +134,11 @@ class CODAPI():
         self.headers = headers
         self.proxies = proxies
         self.loggedIn = loggedIn
-        login = self.login()
-        self.helpers = _helpers(self.headers,self.cookies,self.proxies)
+        login=self.login()
+        self.helpers = _helpers(headers=self.headers,cookies=self.cookies,proxies=self.proxies)
 
     def login (self):
-        if (type(self.sso) == None or len(self.sso)<=0): return ("SSO token is invalid.")
+        if (self.sso == None): return ("SSO token is invalid.")
         loginURL = "https://profile.callofduty.com/cod/mapp/"
         deviceId = uniqid()
         r=_helpers.postReq(f'{loginURL}registerDevice', {'deviceId': deviceId})
@@ -157,7 +158,7 @@ class CODAPI():
         return ("200 - Logged in with SSO.")
 
     ## BLACK OPS 4 ##
-    def BO4Stats(self, gamertag, platform = config.platform):
+    def BO4Stats (self, gamertag, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -168,7 +169,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def BO4zm (self, gamertag, platform = config.platform):
+    def BO4zm (self, gamertag, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -179,7 +180,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def BO4mp (self, gamertag, platform = config.platform):
+    def BO4mp (self, gamertag, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -190,7 +191,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def BO4blackout (self, gamertag, platform = config.platform):
+    def BO4blackout (self, gamertag, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -201,7 +202,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def BO4friends (self, gamertag, platform = config.platform):
+    def BO4friends (self, gamertag, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -212,7 +213,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def BO4combatmp (self, gamertag, platform = config.platform):
+    def BO4combatmp (self, gamertag, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -223,7 +224,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def BO4combatmpdate (self, gamertag, start = 0, end = 0, platform = config.platform):
+    def BO4combatmpdate (self, gamertag, start = 0, end = 0, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -234,7 +235,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def BO4combatzm (self, gamertag, platform = config.platform):
+    def BO4combatzm (self, gamertag, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -245,7 +246,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def BO4combatzmdate (self, gamertag, start = 0, end = 0, platform = config.platform):
+    def BO4combatzmdate (self, gamertag, start = 0, end = 0, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -256,7 +257,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def BO4combatbo (self, gamertag, platform = config.platform):
+    def BO4combatbo (self, gamertag, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -267,7 +268,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def BO4combatbodate (self, gamertag, start = 0, end = 0, platform = config.platform):
+    def BO4combatbodate (self, gamertag, start = 0, end = 0, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -278,7 +279,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def BO4leaderboard (self, page, platform = config.platform):
+    def BO4leaderboard (self, page, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -288,7 +289,7 @@ class CODAPI():
         return platform
 
     ## MODERN WARFARE / WARZONE ##
-    def MWleaderboard (self, page, platform = config.platform):
+    def MWleaderboard (self, page, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -297,7 +298,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def MWcombatmp (self, gamertag, platform = config.platform):
+    def MWcombatmp (self, gamertag, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -327,7 +328,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def MWcombatwz (self, gamertag, platform = config.platform):
+    def MWcombatwz (self, gamertag, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -358,7 +359,7 @@ class CODAPI():
         return platform
 
 
-    def MWfullcombatmp (self, gamertag, platform = config.platform):
+    def MWfullcombatmp (self, gamertag, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -373,7 +374,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def MWfullcombatmpdate (self, gamertag, start = 0, end = 0, platform = config.platform):
+    def MWfullcombatmpdate (self, gamertag, start = 0, end = 0, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -388,7 +389,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def MWfullcombatwz (self, gamertag, platform = config.platform):
+    def MWfullcombatwz (self, gamertag, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -403,7 +404,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def MWfullcombatwzdate (self, gamertag, start = 0, end = 0, platform = config.platform):
+    def MWfullcombatwzdate (self, gamertag, start = 0, end = 0, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -418,7 +419,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def MWmp (self, gamertag, platform = config.platform):
+    def MWmp (self, gamertag, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -433,7 +434,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def MWwz (self, gamertag, platform = config.platform):
+    def MWwz (self, gamertag, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -479,7 +480,7 @@ class CODAPI():
     #     });
     # };
 
-    def MWfriends (self, gamertag, platform = config.platform):
+    def MWfriends (self, gamertag, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -497,7 +498,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def MWWzfriends (self, gamertag, platform = config.platform):
+    def MWWzfriends (self, gamertag, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -515,7 +516,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def MWstats (self, gamertag, platform = config.platform):
+    def MWstats (self, gamertag, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -532,7 +533,7 @@ class CODAPI():
         return platform
 
 
-    def MWwzstats (self, gamertag, platform = config.platform):
+    def MWwzstats (self, gamertag, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -549,7 +550,7 @@ class CODAPI():
         return platform
 
     ## PARSE WEEKLY STATS ##
-    # module.MWweeklystats = function (gamertag, platform = config.platform) {
+    # module.MWweeklystats = function (gamertag, platform = config['platform']) {
     #     return new Promise((resolve, reject) => {
     #         weeklyStats = {};
     #         this.MWstats(gamertag, platform).then((data) => {
@@ -562,7 +563,7 @@ class CODAPI():
     #     });
     # };
 
-    def MWloot (self, gamertag, platform = config.platform):
+    def MWloot (self, gamertag, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -578,7 +579,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def MWAnalysis (self, gamertag, platform = config.platform):
+    def MWAnalysis (self, gamertag, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -591,7 +592,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def MWMapList (self, platform = config.platform):
+    def MWMapList (self, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "uno" or platform == "acti"):
@@ -600,7 +601,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def MWFullMatchInfomp (self, matchId, platform = config.platform):
+    def MWFullMatchInfomp (self, matchId, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "uno" or platform == "acti"):
@@ -609,7 +610,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def MWFullMatchInfowz (self, matchId, platform = config.platform):
+    def MWFullMatchInfowz (self, matchId, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "uno" or platform == "acti"):
@@ -619,7 +620,7 @@ class CODAPI():
         return platform
 
     ## COLD WAR ##
-    def CWmp (self, gamertag, platform = config.platform):
+    def CWmp (self, gamertag, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -635,7 +636,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def CWloot (self, gamertag, platform = config.platform):
+    def CWloot (self, gamertag, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -651,7 +652,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def CWAnalysis (self, gamertag, platform = config.platform): # Could be v1
+    def CWAnalysis (self, gamertag, platform = config['platform']): # Could be v1
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -667,7 +668,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def CWMapList (self, platform = config.platform):
+    def CWMapList (self, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "uno" or platform == "acti"):
@@ -676,7 +677,7 @@ class CODAPI():
             return _helpers.sendRequest(urlInput)
         return platform
 
-    def CWcombatmp (self, gamertag, platform = config.platform):
+    def CWcombatmp (self, gamertag, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -692,7 +693,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def CWcombatdate (self, gamertag, start = 0, end = 0, platform = config.platform):
+    def CWcombatdate (self, gamertag, start = 0, end = 0, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -708,7 +709,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def CWFullMatchInfo (self, matchId, platform = config.platform):
+    def CWFullMatchInfo (self, matchId, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "uno" or platform == "acti"):
@@ -718,7 +719,7 @@ class CODAPI():
         return platform
 
     ## VANGUARD ##
-    def VGmp (self, gamertag, platform = config.platform):
+    def VGmp (self, gamertag, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -734,7 +735,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def VGloot (self, gamertag, platform = config.platform):
+    def VGloot (self, gamertag, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -750,7 +751,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def VGAnalysis (self, gamertag, platform = config.platform): # Could be v1
+    def VGAnalysis (self, gamertag, platform = config['platform']): # Could be v1
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -762,7 +763,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def VGMapList (self, platform = config.platform):
+    def VGMapList (self, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "uno" or platform == "acti"):
@@ -771,7 +772,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def VGcombatmp (self, gamertag, platform = config.platform):
+    def VGcombatmp (self, gamertag, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -787,7 +788,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def VGcombatdate (self, gamertag, start = 0, end = 0, platform = config.platform):
+    def VGcombatdate (self, gamertag, start = 0, end = 0, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "steam"):
@@ -803,7 +804,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def VGFullMatchInfo (self, matchId, platform = config.platform):
+    def VGFullMatchInfo (self, matchId, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "uno" or platform == "acti"):
@@ -822,7 +823,7 @@ class CODAPI():
         urlInput = _helpers.buildUri(f'inventory/v1/title/{title}/bundle/{bundleId}/en')
         return self.helpers.sendRequest(urlInput)
 
-    def friendFeed (self, gamertag, platform = config.platform):
+    def friendFeed (self, gamertag, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "uno" or platform == "acti"):
@@ -844,7 +845,7 @@ class CODAPI():
         urlInput = _helpers.buildProfileUri(f'cod/userInfo/{ssoCookie}')
         self.helpers.sendRequestUserInfoOnly(urlInput)
 
-    def FuzzySearch (self, query, platform = config.platform):
+    def FuzzySearch (self, query, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "battle" or platform == "uno" or platform == "all"):
@@ -855,7 +856,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def getBattlePassInfo (self, gamertag, platform = config.platform):
+    def getBattlePassInfo (self, gamertag, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "battle" or platform == "uno" or platform == "acti"):
@@ -869,7 +870,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def getCodPoints (self, gamertag, platform = config.platform):
+    def getCodPoints (self, gamertag, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "uno" or platform == "acti"):
@@ -879,7 +880,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def getBattlePassLoot (self, season, platform = config.platform):
+    def getBattlePassLoot (self, season, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "uno" or platform == "acti"):
@@ -888,7 +889,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def getPurchasable (self, platform = config.platform):
+    def getPurchasable (self, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "uno" or platform == "acti"):
@@ -897,7 +898,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def purchaseItem (self, gamertag, platform = config.platform, item = "battle_pass_upgrade_bundle_4"):
+    def purchaseItem (self, gamertag, platform = config['platform'], item = "battle_pass_upgrade_bundle_4"):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "uno" or platform == "acti"):
@@ -911,7 +912,7 @@ class CODAPI():
         urlInput = _helpers.buildUri(f'gifting/v1/title/mw/platform/uno/{unoId}/sku/{itemSku}/giftableFriends')
         return self.helpers.sendRequest(urlInput)
 
-    def sendGift (self, gamertag, recipientUnoId, senderUnoId, sendingPlatform, platform = config.platform, itemSku = "432000"):
+    def sendGift (self, gamertag, recipientUnoId, senderUnoId, sendingPlatform, platform = config['platform'], itemSku = "432000"):
         platform = _helpers.platformcheck()
         if platform:
             if (platform == "uno" or platform == "acti"):
@@ -927,7 +928,7 @@ class CODAPI():
             return self.helpers.sendPostRequest(urlInput, data)
         return platform
 
-    def ConnectedAccounts (self, gamertag, platform = config.platform):
+    def ConnectedAccounts (self, gamertag, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             gamertag = _helpers.cleanClientName(gamertag);
@@ -940,7 +941,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def Presence (self, gamertag, platform = config.platform):
+    def Presence (self, gamertag, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             gamertag = _helpers.cleanClientName(gamertag)
@@ -948,7 +949,7 @@ class CODAPI():
             return self.helpers.sendRequest(urlInput)
         return platform
 
-    def Settings (self, gamertag, platform = config.platform):
+    def Settings (self, gamertag, platform = config['platform']):
         platform = _helpers.platformcheck()
         if platform:
             gamertag = _helpers.cleanClientName(gamertag);
