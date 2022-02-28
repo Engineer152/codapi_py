@@ -7,5 +7,10 @@ from codapi_py import CODAPI
 # Initialize
 codapi = CODAPI(sso_token="",cookies={},headers={},proxies=[])
 
-# Endpoints
+## Example Endpoints
+# WZ Profile
+data=codapi.MWwz(gamertag,platform)
+
+# WZ Matches
+data=codapi.MWcombatwz(gamertag,platform)
 ```
