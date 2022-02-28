@@ -133,7 +133,7 @@ class CODAPI():
         self.headers = headers
         self.proxies = proxies
         self.loggedIn = loggedIn
-        CODAPI.login()
+        login = self.login()
         self.helpers = _helpers(self.headers,self.cookies,self.proxies)
 
     def login (self):
